@@ -7,14 +7,6 @@ var userClickedPattern = [];
 var started = false;
 var level = 0;
 
-$(document).click(function() {
-  if (!started) {
-    $("#level-title").text("Level " + level);
-    nextSequence();
-    started = true;
-  }
-});
-
 $(".btn").keydown(function() {
 
   var userChosenColour = $(this).attr("id");
@@ -24,6 +16,14 @@ $(".btn").keydown(function() {
   animatePress(userChosenColour);
 
   checkAnswer(userClickedPattern.length-1);
+});
+
+$(document).click(function() {
+  if (!started) {
+    $("#level-title").text("Level " + level);
+    nextSequence();
+    started = true;
+  }
 });
 
 function checkAnswer(currentLevel) {
@@ -77,5 +77,6 @@ function startOver() {
   gamePattern = [];
   started = false;
 }
+
 
 
