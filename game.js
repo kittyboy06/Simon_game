@@ -7,7 +7,24 @@ var userClickedPattern = [];
 var started = false;
 var level = 0;
 
-$(".btn").keydown(function() {
+
+function gamestarted()
+{
+  if (!started) {
+    $("#level-title").text("Level " + level);
+    nextSequence();
+    started = true;
+  }
+}
+
+$(".btn-danger").on("click", function () {
+  gamestarted();
+  $(this).prop("disabled", true);
+});
+
+
+
+$(".btn").click(function() {
 
   var userChosenColour = $(this).attr("id");
   userClickedPattern.push(userChosenColour);
@@ -16,14 +33,6 @@ $(".btn").keydown(function() {
   animatePress(userChosenColour);
 
   checkAnswer(userClickedPattern.length-1);
-});
-
-$(document).one("click",function() {
-  if (!started) {
-    $("#level-title").text("Level " + level);
-    nextSequence();
-    started = true;
-  }
 });
 
 function checkAnswer(currentLevel) {
@@ -37,8 +46,8 @@ function checkAnswer(currentLevel) {
     } else {
       playSound("wrong");
       $("body").addClass("game-over");
-      $("#level-title").text("Game Over, Press Any Key to Restart");
-
+      $("#level-title").text("Game Over, Press to Restart");
+      $(".btn-danger").prop("disabled", false);
       setTimeout(function () {
         $("body").removeClass("game-over");
       }, 200);
@@ -47,8 +56,8 @@ function checkAnswer(currentLevel) {
     }
 }
 
-
 function nextSequence() {
+  $(".btn-danger").prop("disabled", false);
   userClickedPattern = [];
   level++;
   $("#level-title").text("Level " + level);
@@ -77,7 +86,3 @@ function startOver() {
   gamePattern = [];
   started = false;
 }
-
-
-
-
