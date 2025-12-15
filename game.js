@@ -15,7 +15,7 @@ $(document).keypress(function() {
   }
 });
 
-$(".btn").click(function() {
+$(".btn").keydown(function() {
 
   var userChosenColour = $(this).attr("id");
   userClickedPattern.push(userChosenColour);
@@ -77,3 +77,4 @@ function startOver() {
   gamePattern = [];
   started = false;
 }
+
