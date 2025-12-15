@@ -18,7 +18,7 @@ $(".btn").keydown(function() {
   checkAnswer(userClickedPattern.length-1);
 });
 
-$(document).click(function() {
+$(document).one("click",function() {
   if (!started) {
     $("#level-title").text("Level " + level);
     nextSequence();
@@ -77,6 +77,7 @@ function startOver() {
   gamePattern = [];
   started = false;
 }
+
 
 
 
